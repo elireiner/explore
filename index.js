@@ -14,15 +14,15 @@ function displayResults() {
 };
 
 function renderResultsScreen(state) {
-
+    
 };
 
 function handleSubmit() {
-    $('.search').submit(function(event){
+    $('.search').submit(function (event) {
         event.preventDefault();
         let enteredState = $('input[type="text"]').val();
-        $('.search').toggleClass('hidden');
         renderResultsScreen(enteredState);
+        $('.search').toggleClass('hidden');
     });
 };
 
