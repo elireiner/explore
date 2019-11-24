@@ -1,4 +1,5 @@
 'use strict'
+let keepTrack = [];
 
 function getWeather(){
 
@@ -21,7 +22,15 @@ function handleSubmit() {
 };
 
 function handleSearchButtons(){
-
+    $('#news').click(function(){
+        keepTrack.push('news');
+    });
+    $('#weather').click(function(){
+        keepTrack.push('weather');
+    });
+    $('#both').click(function(){
+        keepTrack.push('both');
+    });
 };
 
 function renderSearchScreen() {
