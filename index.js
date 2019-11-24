@@ -14,6 +14,9 @@ function displayResults() {
 };
 
 function renderResultsScreen(state) {
+};
+
+function handleGetting(state) {
     
 };
 
@@ -21,7 +24,7 @@ function handleSubmit() {
     $('.search').submit(function (event) {
         event.preventDefault();
         let enteredState = $('input[type="text"]').val();
-        renderResultsScreen(enteredState);
+        handleGetting(enteredState);
         $('.search').toggleClass('hidden');
     });
 };
