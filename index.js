@@ -29,7 +29,10 @@ function renderSearchScreen() {
 };
 
 function handleHomeButton() {
-
+    $('.home').on('click', '#explore-Button', function(){
+        $('.home').toggleClass('hidden');
+        renderSearchScreen();
+    });
 };
 
 function handleExploreApp() {
