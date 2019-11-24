@@ -1,11 +1,11 @@
 'use strict'
 let keepTrack = [];
 
-function getWeather() {
+function getWeather(state) {
 
 };
 
-function getNews() {
+function getNews(state) {
 
 };
 
@@ -13,19 +13,22 @@ function displayResults() {
 
 };
 
-function renderResultsScreen(state) {
-};
 
 function handleGetting(state) {
     
+};
+
+function renderResultsScreen(state) {
+    $('.search').toggleClass('hidden');
+    $('.results').toggleClass('hidden');
 };
 
 function handleSubmit() {
     $('.search').submit(function (event) {
         event.preventDefault();
         let enteredState = $('input[type="text"]').val();
+        renderResultsScreen();
         handleGetting(enteredState);
-        $('.search').toggleClass('hidden');
     });
 };
 
