@@ -13,12 +13,17 @@ function displayResults() {
 
 };
 
-function renderResultsScreen() {
+function renderResultsScreen(state) {
 
 };
 
 function handleSubmit() {
-
+    $('.search').submit(function(event){
+        event.preventDefault();
+        let enteredState = $('input[type="text"]').val();
+        $('.search').toggleClass('hidden');
+        renderResultsScreen(enteredState);
+    });
 };
 
 function renderForm() {
@@ -47,6 +52,7 @@ function handleSearchButtons() {
 function renderSearchScreen() {
     $('.search').toggleClass('hidden');
     handleSearchButtons();
+    handleSubmit();
 };
 
 function handleHomeButton() {
