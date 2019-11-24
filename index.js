@@ -25,7 +25,7 @@ function handleSearchButtons(){
 };
 
 function renderSearchScreen() {
-
+    $('.search').toggleClass('hidden');
 };
 
 function handleHomeButton() {
