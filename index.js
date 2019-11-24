@@ -1,15 +1,15 @@
 'use strict'
 let keepTrack = [];
 
-function getWeather(){
+function getWeather() {
 
 };
 
-function getNews(){
+function getNews() {
 
 };
 
-function displayResults(){
+function displayResults() {
 
 };
 
@@ -21,23 +21,23 @@ function handleSubmit() {
 
 };
 
-function renderForm(){
+function renderForm() {
     $('#news').toggleClass('hidden');
     $('#weather').toggleClass('hidden');
     $('#both').toggleClass('hidden');
     $('.form').toggleClass('hidden');
 };
 
-function handleSearchButtons(){
-    $('#news').click(function(){
+function handleSearchButtons() {
+    $('#news').click(function () {
         keepTrack.push('news');
         renderForm();
     });
-    $('#weather').click(function(){
+    $('#weather').click(function () {
         keepTrack.push('weather');
         renderForm();
     });
-    $('#both').click(function(){
+    $('#both').click(function () {
         keepTrack.push('both');
         renderForm();
     });
@@ -46,10 +46,11 @@ function handleSearchButtons(){
 
 function renderSearchScreen() {
     $('.search').toggleClass('hidden');
+    handleSearchButtons();
 };
 
 function handleHomeButton() {
-    $('.home').on('click', '#explore-Button', function(){
+    $('.home').on('click', '#explore-Button', function () {
         $('.home').toggleClass('hidden');
         renderSearchScreen();
     });
@@ -57,7 +58,6 @@ function handleHomeButton() {
 
 function handleExploreApp() {
     handleHomeButton();
-    handleSearchButtons();
 };
 
 $(handleExploreApp);
