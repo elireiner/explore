@@ -2,8 +2,8 @@
 
 let keepTrack = [];
 
-function displayResults() {
-
+function displayResults(responseJson) {
+    console.log(responseJson.temp)
 };
 
 function getWeather(state) {
@@ -13,7 +13,7 @@ function getWeather(state) {
     fetch(url)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
-    .error()
+    .catch(err => alert(`error:` + err))
 };
 
 function getNews(state) {
