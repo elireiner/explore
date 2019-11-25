@@ -1,21 +1,29 @@
 'use strict'
+
 let keepTrack = [];
-
-function getWeather(state) {
-
-};
-
-function getNews(state) {
-
-};
 
 function displayResults() {
 
 };
 
+function getWeather(state) {
+};
+
+function getNews(state) {
+  
+};
 
 function handleGetting(state) {
-    
+    if (keepTrack[0] === 'news') {
+        getNews(state);
+    }
+    else if (keepTrack[0] === 'weather') {
+        getWeather(state);
+    }
+    else {
+        getNews(state);
+        getWeather(state);
+    }
 };
 
 function renderResultsScreen(state) {
