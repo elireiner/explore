@@ -7,6 +7,13 @@ function displayResults() {
 };
 
 function getWeather(state) {
+    let baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+    let queryString = 'key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=New+York,NY'
+    let url = baseUrl + queryString
+    fetch(url)
+    .then(response => response.json())
+    .then(responseJson => displayResults(responseJson))
+    .error()
 };
 
 function getNews(state) {
