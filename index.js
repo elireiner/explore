@@ -14,13 +14,21 @@ function displayWeatherResults(responseJson) {
 };
 
 function displayNewsResults(responseJson) {
-   
+   $('#js-news-results-list').empty();
+   for (let i = 0; i <= responseJson.articles.length; i++){
+    $('#js-news-results-list').append(`
+    <li>
+    <h3></h3>
+    <a href="${getUrl()}">${responseJson.articles[i].title}</a>
+    <p>Sorce name: ${responseJson.articles[i].source.name}</p>
+    </li>`)
+   }
 };
 
 function getWeather(state) {
     let baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
-    let queryString = 'key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=New+York,NY'
-    let url = baseUrl + queryString
+    let queryString = 'key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=New+York,NY';
+    let url = baseUrl + queryString;
     fetch(url)
     .then(response => response.json())
     .then(responseJson => displayWeatherResults(responseJson))
@@ -34,7 +42,7 @@ function getNews(state) {
     fetch(url)
     .then(response => response.json())
     .then(responseJson => displayNewsResults(responseJson))
-    .catch(err => alert('Error:' + err))
+    .catch(err => alert(`error:` + err))
 };
 
 function handleGetting(state) {
