@@ -2,7 +2,7 @@
 
 let keepTrack = [];
 
-function displayResults(responseJson) {
+function displayWeatherResults(responseJson) {
     $('#js-weather-results-list').empty();
     for (let i = 0; i < responseJson.data.length; i++){
         $('#js-weather-results-list').append(`
@@ -13,18 +13,28 @@ function displayResults(responseJson) {
     }
 };
 
+function displayNewsResults(responseJson) {
+   
+};
+
 function getWeather(state) {
     let baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
     let queryString = 'key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=New+York,NY'
     let url = baseUrl + queryString
     fetch(url)
     .then(response => response.json())
-    .then(responseJson => displayResults(responseJson))
+    .then(responseJson => displayWeatherResults(responseJson))
     .catch(err => alert(`error:` + err))
 };
 
 function getNews(state) {
-  
+    let baseUrl = 'https://newsapi.org/v2/top-headlines?';
+    let queryString = 'country=us&apiKey=832ecf1cdf9741c19ffe553820ed8d60';
+    let url = baseUrl + queryString;
+    fetch(url)
+    .then(response => response.json())
+    .then(responseJson => displayNewsResults(responseJson))
+    .catch(err => alert('Error:' + err))
 };
 
 function handleGetting(state) {
