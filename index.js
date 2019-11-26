@@ -13,13 +13,14 @@ function displayWeatherResults(responseJson) {
     }
 };
 
+
 function displayNewsResults(responseJson) {
    $('#js-news-results-list').empty();
-   for (let i = 0; i <= responseJson.articles.length; i++){
+   for (let i = 0; i < responseJson.articles.length; i++){
     $('#js-news-results-list').append(`
     <li>
     <h3></h3>
-    <a href="${getUrl()}">${responseJson.articles[i].title}</a>
+    <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
     <p>Sorce name: ${responseJson.articles[i].source.name}</p>
     </li>`)
    }
