@@ -3,9 +3,9 @@
 let keepTrack = [];
 
 function displayResults(responseJson) {
-    $('#js-news-results-list').empty();
+    $('#js-weather-results-list').empty();
     for (let i = 0; i < responseJson.data.length; i++){
-        $('#js-news-results-list').append(`
+        $('#js-weather-results-list').append(`
         <li>
         <h3>Day: ${[i + 1]}</h3>
         <p>${responseJson.data[i].temp}</p>
