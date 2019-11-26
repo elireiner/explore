@@ -3,7 +3,14 @@
 let keepTrack = [];
 
 function displayResults(responseJson) {
-    console.log(responseJson.temp)
+    $('#js-news-results-list').empty();
+    for (let i = 0; i < responseJson.data.length; i++){
+        $('#js-news-results-list').append(`
+        <li>
+        <h3>Day: ${[i + 1]}</h3>
+        <p>${responseJson.data[i].temp}</p>
+        </li>`);
+    }
 };
 
 function getWeather(state) {
