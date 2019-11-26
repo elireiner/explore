@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,27 @@
     <title>Explore</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <main class="home">
         <button id="explore-Button">Epolre your destination</button>
     </main>
     <main class="search hidden">
-            <button id="news">see the news</button>
-            <button id="weather">see the weather</button>
-            <button id="both">both</button>
+        <button id="news">see the news</button>
+        <button id="weather">see the weather</button>
+        <button id="both">both</button>
         <form class="form hidden">
-            <label for="">enter your destination</label>
-            <input type="text">
+            <legend>Enter your destination</legend>
+
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="New York">
+
+            <label for="state">State</label>
+            <input type="text" id="state" placeholder="NY">
+
+            <label for="country">Country</label>
+            <input type="text" id="country" placeholder="US">
+
             <input type="submit">
         </form>
     </main>
@@ -37,4 +48,5 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
 </body>
+
 </html>
