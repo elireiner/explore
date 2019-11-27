@@ -111,15 +111,8 @@ function renderSearchScreen() {
     handleSubmit();
 };
 
-function handleHomeButton() {
-    $('.home').on('click', '#explore-Button', function () {
-        $('.home').toggleClass('hidden');
-        renderSearchScreen();
-    });
-};
-
 function handleExploreApp() {
-    handleHomeButton();
+    renderSearchScreen()
 };
 
 $(handleExploreApp);
