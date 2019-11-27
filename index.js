@@ -13,7 +13,6 @@ function displayWeatherResults(responseJson) {
     }
 };
 
-
 function displayNewsResults(responseJson) {
    $('#js-news-results-list').empty();
    for (let i = 0; i < responseJson.articles.length; i++){
@@ -26,9 +25,9 @@ function displayNewsResults(responseJson) {
    }
 };
 
-function getWeather(state) {
+function getWeather(cityState) {
     let baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
-    let queryString = 'key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=New+York,NY';
+    let queryString = `key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=${cityState}`;
     let url = baseUrl + queryString;
     fetch(url)
     .then(response => response.json())
@@ -36,9 +35,9 @@ function getWeather(state) {
     .catch(err => alert(`error:` + err))
 };
 
-function getNews(state) {
+function getNews(country) {
     let baseUrl = 'https://newsapi.org/v2/top-headlines?';
-    let queryString = 'country=us&apiKey=832ecf1cdf9741c19ffe553820ed8d60';
+    let queryString = `country=${country}&apiKey=832ecf1cdf9741c19ffe553820ed8d60`;
     let url = baseUrl + queryString;
     fetch(url)
     .then(response => response.json())
@@ -46,16 +45,16 @@ function getNews(state) {
     .catch(err => alert(`error:` + err))
 };
 
-function handleGetting(state) {
+function handleGetting(cityState, country) {
     if (keepTrack[0] === 'news') {
-        getNews(state);
+        getNews(country);
     }
     else if (keepTrack[0] === 'weather') {
-        getWeather(state);
+        getWeather(cityState);
     }
     else {
-        getNews(state);
-        getWeather(state);
+        getNews(country);
+        getWeather(cityState);
     }
 };
 
@@ -64,12 +63,22 @@ function renderResultsScreen(state) {
     $('.results').toggleClass('hidden');
 };
 
+function combine(city, state){
+    let formatedCity = city.split(' ');
+    formatedCity = formatedCity.join('+');
+    formatedCity = formatedCity + ',' + state;
+    return formatedCity
+}
+
 function handleSubmit() {
     $('.search').submit(function (event) {
         event.preventDefault();
-        let enteredState = $('input[type="text"]').val();
+        let city = $('#city').val();
+        let state = $('#state').val();
+        let country = $('#country').val();
+        let cityState = combine(city ,state);
         renderResultsScreen();
-        handleGetting(enteredState);
+        handleGetting(cityState, country);
     });
 };
 
