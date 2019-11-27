@@ -11,22 +11,36 @@
 
 <body>
     <main class="search hidden">
-        <button id="news">see the news</button>
-        <button id="weather">see the weather</button>
-        <button id="both">both</button>
-        <form class="form hidden">
+        <form class="form"></form>
+        <fieldset>
+            <legend>What do you want to see</legend>
+            <label for="news">The news</label>
+            <input type="radio" id="news" name="option">
+            <br>
+            <label for="weather">The weather</label>
+            <input type="radio" id="weather" name="option">
+            <br>
+            <label for="both">Both</label>
+            <input type="radio" id="both" name="option" checked>
+            </form>
+        </fieldset>
+
+
+        <fieldset>
             <legend>Enter your destination</legend>
 
             <label for="city">City</label>
             <input type="text" id="city" placeholder="New York">
-
+            <br>
             <label for="state">State</label>
             <input type="text" id="state" placeholder="NY">
-
+            <br>
             <label for="country">Country</label>
             <input type="text" id="country" placeholder="US">
+        </fieldset>
 
-            <input type="submit">
+        <button type="submit">Submit</button>
+        <button type="reset">reset</button>
         </form>
     </main>
     <main class="results hidden">

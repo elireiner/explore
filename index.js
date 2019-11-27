@@ -1,6 +1,5 @@
 'use strict'
 
-let keepTrack = [];
 
 function displayWeatherResults(responseJson) {
     $('#js-weather-results-list').empty();
@@ -46,10 +45,11 @@ function getNews(country) {
 };
 
 function handleGetting(cityState, country) {
-    if (keepTrack[0] === 'news') {
+    if ($('#news').is(':checked')) {
+        console.log('hi')
         getNews(country);
     }
-    else if (keepTrack[0] === 'weather') {
+    else if ($('#weather').is(':checked')) {
         getWeather(cityState);
     }
     else {
@@ -76,13 +76,13 @@ function handleSubmit() {
         let city = $('#city').val();
         let state = $('#state').val();
         let country = $('#country').val();
-        let cityState = combine(city ,state);
+        let cityState = combine(city, state);
         renderResultsScreen();
         handleGetting(cityState, country);
     });
 };
 
-function renderForm() {
+/*function renderForm() {
     $('#news').toggleClass('hidden');
     $('#weather').toggleClass('hidden');
     $('#both').toggleClass('hidden');
@@ -91,23 +91,23 @@ function renderForm() {
 
 function handleSearchButtons() {
     $('#news').click(function () {
-        keepTrack.push('news');
+       
         renderForm();
     });
     $('#weather').click(function () {
-        keepTrack.push('weather');
+        
         renderForm();
     });
     $('#both').click(function () {
-        keepTrack.push('both');
+       
         renderForm();
     });
 
-};
+};*/
 
 function renderSearchScreen() {
     $('.search').toggleClass('hidden');
-    handleSearchButtons();
+    //handleSearchButtons();
     handleSubmit();
 };
 
