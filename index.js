@@ -82,33 +82,8 @@ function handleSubmit() {
     });
 };
 
-/*function renderForm() {
-    $('#news').toggleClass('hidden');
-    $('#weather').toggleClass('hidden');
-    $('#both').toggleClass('hidden');
-    $('.form').toggleClass('hidden');
-};
-
-function handleSearchButtons() {
-    $('#news').click(function () {
-       
-        renderForm();
-    });
-    $('#weather').click(function () {
-        
-        renderForm();
-    });
-    $('#both').click(function () {
-       
-        renderForm();
-    });
-
-};*/
-
 function renderSearchScreen() {
     $('.search').toggleClass('hidden');
-    //handleSearchButtons();
-    console.log('hi1')
     handleSubmit();
 };
 
