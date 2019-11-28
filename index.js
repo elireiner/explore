@@ -71,14 +71,14 @@ function combine(city, state){
 }
 
 function handleSubmit() {
-    $('.search').submit(function (event) {
+    $('form').submit(function (event) {
         event.preventDefault();
         let city = $('#city').val();
         let state = $('#state').val();
-        let country = $('#country').val();
+        let country = $('option:selected').val();
         let cityState = combine(city, state);
-        renderResultsScreen();
         handleGetting(cityState, country);
+        renderResultsScreen();
     });
 };
 
@@ -108,6 +108,7 @@ function handleSearchButtons() {
 function renderSearchScreen() {
     $('.search').toggleClass('hidden');
     //handleSearchButtons();
+    console.log('hi1')
     handleSubmit();
 };
 
