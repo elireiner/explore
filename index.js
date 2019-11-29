@@ -1,5 +1,12 @@
 'use strict'
 
+function returnSearch(){
+    $('#return').click(function(event){
+        event.preventDefault();
+        $('.results').toggleClass('hidden');
+        renderSearchScreen();
+    })
+}
 
 function displayWeatherResults(responseJson) {
     $('#js-weather-results-list').empty();
@@ -46,7 +53,6 @@ function getNews(country) {
 
 function handleGetting(cityState, country) {
     if ($('#news').is(':checked')) {
-        console.log('hi')
         getNews(country);
     }
     else if ($('#weather').is(':checked')) {
@@ -59,8 +65,11 @@ function handleGetting(cityState, country) {
 };
 
 function renderResultsScreen(state) {
+    console.log('render Results');
     $('.search').toggleClass('hidden');
+    console.log('render Results2');
     $('.results').toggleClass('hidden');
+    console.log('render Results3');
 };
 
 function combine(city, state){
@@ -88,7 +97,8 @@ function renderSearchScreen() {
 };
 
 function handleExploreApp() {
-    renderSearchScreen()
+    renderSearchScreen();
+    returnSearch();
 };
 
 $(handleExploreApp);
