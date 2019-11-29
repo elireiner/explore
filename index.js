@@ -19,7 +19,7 @@ function displayNewsResults(responseJson) {
     <li>
     <h3></h3>
     <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
-    <p>Sorce name: ${responseJson.articles[i].source.name}</p>
+    <p>Source name: ${responseJson.articles[i].source.name}</p>
     </li>`)
    }
 };
