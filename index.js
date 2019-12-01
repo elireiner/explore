@@ -14,6 +14,7 @@ function displayWeatherResults(responseJson) {
         $('#js-weather-results-list').append(`
         <div class="weather-data">
         <h4>Day: ${[i + 1]}</h3>
+        <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
         <p>${responseJson.data[i].high_temp}/${responseJson.data[i].low_temp}</p>
         <p>${responseJson.data[i].weather.description}</p>
         </div>`);
