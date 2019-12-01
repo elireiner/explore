@@ -57,22 +57,25 @@ function getNews(country) {
 function handleGetting(cityState, country) {
     if ($('#news').is(':checked')) {
         getNews(country);
+        $('#js-news-results').show();
+        $('#js-weather-results').hide();
     }
     else if ($('#weather').is(':checked')) {
         getWeather(cityState);
+        $('#js-weather-results').show();
+        $('#js-news-results').hide();
     }
     else {
         getNews(country);
         getWeather(cityState);
+        $('#js-weather-results').show();
+        $('#js-news-results').show();
     }
 };
 
 function renderResultsScreen(state) {
-    console.log('render Results');
     $('.search').hide();
-    console.log('render Results2');
     $('.results').show();
-    console.log('render Results3');
 };
 
 function combine(city, state){
