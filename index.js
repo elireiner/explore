@@ -1,14 +1,23 @@
 'use strict'
 
+function returnSearch(){
+    $('#return').click(function(event){
+        event.preventDefault();
+        $('.results').hide();
+        renderSearchScreen();
+    })
+}
 
 function displayWeatherResults(responseJson) {
     $('#js-weather-results-list').empty();
     for (let i = 0; i < responseJson.data.length; i++){
         $('#js-weather-results-list').append(`
-        <li>
-        <h3>Day: ${[i + 1]}</h3>
-        <p>${responseJson.data[i].temp}</p>
-        </li>`);
+        <div class="weather-data">
+        <h4>Day: ${[i + 1]}</h3>
+        <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
+        <p>${responseJson.data[i].high_temp}/${responseJson.data[i].low_temp}</p>
+        <p>${responseJson.data[i].weather.description}</p>
+        </div>`);
     }
 };
 
@@ -16,11 +25,10 @@ function displayNewsResults(responseJson) {
    $('#js-news-results-list').empty();
    for (let i = 0; i < responseJson.articles.length; i++){
     $('#js-news-results-list').append(`
-    <li>
-    <h3></h3>
+    <div>
     <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
     <p>Source name: ${responseJson.articles[i].source.name}</p>
-    </li>`)
+    </div>`)
    }
 };
 
@@ -46,21 +54,26 @@ function getNews(country) {
 
 function handleGetting(cityState, country) {
     if ($('#news').is(':checked')) {
-        console.log('hi')
         getNews(country);
+        $('#js-news-results').show();
+        $('#js-weather-results').hide();
     }
     else if ($('#weather').is(':checked')) {
         getWeather(cityState);
+        $('#js-weather-results').show();
+        $('#js-news-results').hide();
     }
     else {
         getNews(country);
         getWeather(cityState);
+        $('#js-weather-results').show();
+        $('#js-news-results').show();
     }
 };
 
 function renderResultsScreen(state) {
-    $('.search').toggleClass('hidden');
-    $('.results').toggleClass('hidden');
+    $('.search').hide();
+    $('.results').show();
 };
 
 function combine(city, state){
@@ -83,12 +96,14 @@ function handleSubmit() {
 };
 
 function renderSearchScreen() {
-    $('.search').toggleClass('hidden');
+    $('.results').hide();
+    $('.search').show();
     handleSubmit();
 };
 
 function handleExploreApp() {
-    renderSearchScreen()
+    renderSearchScreen();
+    returnSearch();
 };
 
 $(handleExploreApp);
