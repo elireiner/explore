@@ -3,7 +3,7 @@
 function returnSearch(){
     $('#return').click(function(event){
         event.preventDefault();
-        $('.results').toggleClass('hidden');
+        $('.results').hide();
         renderSearchScreen();
     })
 }
@@ -13,8 +13,11 @@ function displayWeatherResults(responseJson) {
     for (let i = 0; i < responseJson.data.length; i++){
         $('#js-weather-results-list').append(`
         <li>
-        <h3>Day: ${[i + 1]}</h3>
-        <p>${responseJson.data[i].temp}</p>
+        <div class="weather-data">
+        <h4>Day: ${[i + 1]}</h3>
+        <p>${responseJson.data[i].high_temp}/${responseJson.data[i].low_temp}</p>
+        <p>${responseJson.data[i].weather.description}</p>
+        </div>
         </li>`);
     }
 };
@@ -66,9 +69,9 @@ function handleGetting(cityState, country) {
 
 function renderResultsScreen(state) {
     console.log('render Results');
-    $('.search').toggleClass('hidden');
+    $('.search').hide();
     console.log('render Results2');
-    $('.results').toggleClass('hidden');
+    $('.results').show();
     console.log('render Results3');
 };
 
@@ -92,7 +95,8 @@ function handleSubmit() {
 };
 
 function renderSearchScreen() {
-    $('.search').toggleClass('hidden');
+    $('.results').hide();
+    $('.search').show();
     handleSubmit();
 };
 
