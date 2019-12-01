@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <main class="search hidden">
+    <main class="search">
+        <h1>Traveling? Explore your destination</h1>
         <form class="form">
             <fieldset>
                 <legend>What do you want to see</legend>
@@ -28,10 +29,10 @@
                 <legend>Enter your destination</legend>
 
                 <label for="city">City</label>
-                <input type="text" id="city" placeholder="New York" required>
+                <input type="text" id="city" placeholder="e.g. New York" required>
                 <br>
                 <label for="state">State</label>
-                <input type="text" id="state" placeholder="NY" required>
+                <input type="text" id="state" placeholder="e.g. NY" required>
             </fieldset>
 
             <select>
@@ -290,10 +291,16 @@
             <button type="reset">reset</button>
         </form>
     </main>
-    <main class="results hidden">
-        <h1>here are your results</h1>
+    <main class="results">
+        <h1>Here are your results</h1>
         <section id="js-weather-results">
             <h2>The weather</h2>
+            <div class="weather-description">
+                <p>Day</p>
+                <p>High/Low</p>
+                <p>Description</p>
+                <p>°F</p>
+            </div>
             <ul id="js-weather-results-list">
             </ul>
         </section>
