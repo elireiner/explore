@@ -12,13 +12,11 @@ function displayWeatherResults(responseJson) {
     $('#js-weather-results-list').empty();
     for (let i = 0; i < responseJson.data.length; i++){
         $('#js-weather-results-list').append(`
-        <li>
         <div class="weather-data">
         <h4>Day: ${[i + 1]}</h3>
         <p>${responseJson.data[i].high_temp}/${responseJson.data[i].low_temp}</p>
         <p>${responseJson.data[i].weather.description}</p>
-        </div>
-        </li>`);
+        </div>`);
     }
 };
 
@@ -26,11 +24,10 @@ function displayNewsResults(responseJson) {
    $('#js-news-results-list').empty();
    for (let i = 0; i < responseJson.articles.length; i++){
     $('#js-news-results-list').append(`
-    <li>
-    <h3></h3>
+    <div>
     <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
     <p>Source name: ${responseJson.articles[i].source.name}</p>
-    </li>`)
+    </div>`)
    }
 };
 
