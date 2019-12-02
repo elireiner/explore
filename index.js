@@ -121,7 +121,8 @@ function handleSubmit() {
         let state = $('#state').val();
         let country = $('option:selected').val();
         let cityState = combine(city, state);
-        let newsCityState = city + ` AND ` + state;
+        let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
+        console.log(newsCityState);
         let formatedQuery = formatQueryParams(newsCityState);
         handleGetting(cityState, country, formatedQuery);
         renderResultsScreen();
