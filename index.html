@@ -29,13 +29,14 @@
                 <legend>Enter your destination</legend>
 
                 <label for="city">City</label>
-                <input type="text" id="city" placeholder="e.g. New York" required>
+                <input type="text" id="city" placeholder="e.g. Palo Alto" required>
                 <br>
                 <label for="state">State</label>
-                <input type="text" id="state" placeholder="e.g. NY" required>
+                <input type="text" id="state" placeholder="e.g. California" required>
             </fieldset>
 
-            <select>
+            <label for="country">Select country</label>
+            <select id="country">
                 <option value="US" selected>United States</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AX">Åland Islands</option>
@@ -307,8 +308,8 @@
         </section>
         <section id="js-news-results">
             <h2>The news</h2>
-            <div id="js-news-results-list">
-            </div>
+            <ul id="js-news-results-list">
+            </ul>
         </section>
         <button type="button" id="return">return</button>
     </main>
