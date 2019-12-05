@@ -8,10 +8,35 @@ function returnSearch() {
         renderSearchScreen();
     })
 }
+function handleUnitButtons(){
+    $('#js-weather-results-c').hide();
+    $('#js-f').click(event => {
+        event.preventDefault();
+        $('#js-weather-results-c').hide();
+        $('#js-weather-results-f').show();
+    });
+    $('#js-c').click(event => {
+        event.preventDefault();
+        $('#js-weather-results-f').hide();
+        $('#js-weather-results-c').show();
+    });
+}
 
-function displayWeatherResults(responseJson) {
+function displayWeatherResultsC(responseJson) {
     for (let i = 0; i < responseJson.data.length; i++) {
-        $('#js-weather-results-list').append(`
+        $('#js-weather-results-c').append(`
+        <div class="weather-data">
+        <h3>Day: ${[i + 1]}</h3>
+        <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
+        <p>${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
+        <p>${responseJson.data[i].weather.description}</p>
+        </div>`);
+    }
+};
+
+function displayWeatherResultsF(responseJson) {
+    for (let i = 0; i < responseJson.data.length; i++) {
+        $('#js-weather-results-f').append(`
         <div class="weather-data">
         <h3>Day: ${[i + 1]}</h3>
         <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
@@ -37,7 +62,15 @@ function getWeather(cityState) {
     let url = baseUrl + queryString;
     fetch(url)
         .then(response => response.json())
-        .then(responseJson => displayWeatherResults(responseJson))
+        .then(responseJson => displayWeatherResultsF(responseJson))
+        .catch(err => alert(`error:` + err))
+
+    baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+    queryString = `key=5ae81936c8514eacb8ef228b49c7eaa4&city=${cityState}`;
+    url = baseUrl + queryString;
+    fetch(url)
+        .then(response => response.json())
+        .then(responseJson => displayWeatherResultsC(responseJson))
         .catch(err => alert(`error:` + err))
 };
 
@@ -138,6 +171,7 @@ function renderSearchScreen() {
 function handleExploreApp() {
     renderSearchScreen();
     returnSearch();
+    handleUnitButtons();
 };
 
 $(handleExploreApp);
