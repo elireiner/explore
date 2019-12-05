@@ -13,7 +13,7 @@ function displayWeatherResults(responseJson) {
     for (let i = 0; i < responseJson.data.length; i++) {
         $('#js-weather-results-list').append(`
         <div class="weather-data">
-        <h4>Day: ${[i + 1]}</h3>
+        <h3>Day: ${[i + 1]}</h3>
         <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
         <p>${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
         <p>${responseJson.data[i].weather.description}</p>
@@ -24,10 +24,10 @@ function displayWeatherResults(responseJson) {
 function displayNewsResults(responseJson) {
     for (let i = 0; i < responseJson.articles.length; i++) {
         $('#js-news-results-list').append(`
-    <div>
+    <li>
     <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
     <p>Source name: ${responseJson.articles[i].source.name}</p>
-    </div>`)
+    </li>`)
     }
 };
 
