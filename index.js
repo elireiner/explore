@@ -8,23 +8,23 @@ function returnSearch() {
         renderSearchScreen();
     })
 }
-function handleUnitButtons(){
-    $('#js-weather-results-c').hide();
+function handleUnitButtons() {
+    $('#js-weather-results-M').hide();
     $('#js-f').click(event => {
         event.preventDefault();
-        $('#js-weather-results-c').hide();
-        $('#js-weather-results-f').show();
+        $('#js-weather-results-M').hide();
+        $('#js-weather-results-I').show();
     });
     $('#js-c').click(event => {
         event.preventDefault();
-        $('#js-weather-results-f').hide();
-        $('#js-weather-results-c').show();
+        $('#js-weather-results-I').hide();
+        $('#js-weather-results-M').show();
     });
 }
 
-function displayWeatherResultsC(responseJson) {
+function displayWeatherResults(responseJson, unitType) {
     for (let i = 0; i < responseJson.data.length; i++) {
-        $('#js-weather-results-c').append(`
+        $(`#js-weather-results-${unitType}`).append(`
         <div class="weather-data">
         <h3>Day: ${[i + 1]}</h3>
         <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
@@ -34,17 +34,7 @@ function displayWeatherResultsC(responseJson) {
     }
 };
 
-function displayWeatherResultsF(responseJson) {
-    for (let i = 0; i < responseJson.data.length; i++) {
-        $('#js-weather-results-f').append(`
-        <div class="weather-data">
-        <h3>Day: ${[i + 1]}</h3>
-        <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
-        <p>${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
-        <p>${responseJson.data[i].weather.description}</p>
-        </div>`);
-    }
-};
+
 
 function displayNewsResults(responseJson) {
     for (let i = 0; i < responseJson.articles.length; i++) {
@@ -56,31 +46,45 @@ function displayNewsResults(responseJson) {
     }
 };
 
-function getWeather(cityState) {
-    let baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
-    let queryString = `key=5ae81936c8514eacb8ef228b49c7eaa4&units=I&city=${cityState}`;
-    let url = baseUrl + queryString;
-    fetch(url)
-        .then(response => response.json())
-        .then(responseJson => displayWeatherResultsF(responseJson))
-        .catch(err => alert(`error:` + err))
+function formatQueryParams(params) {
+    let queryItems = Object.keys(params)
+        .map(key => `${key}=${params[key]}`)
+    return queryItems.join('&');
+}
 
-    baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
-    queryString = `key=5ae81936c8514eacb8ef228b49c7eaa4&city=${cityState}`;
-    url = baseUrl + queryString;
+let weatherBaseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?';
+let weatherApiKey = '5ae81936c8514eacb8ef228b49c7eaa4';
+
+function getWeather(cityState, unitType) {
+    let params = {
+        units: unitType,
+        city: cityState,
+        key: weatherApiKey
+    } 
+    let queryString = formatQueryParams(params)
+    let url = weatherBaseUrl + queryString;
+
+    console.log(url)
     fetch(url)
         .then(response => response.json())
-        .then(responseJson => displayWeatherResultsC(responseJson))
+        .then(responseJson => displayWeatherResults(responseJson, unitType))
         .catch(err => alert(`error:` + err))
 };
 
+let newsBaseUrl = 'https://newsapi.org/v2/'
+let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
 
-function getNewsQuery(formatedQuery) {
-    let baseUrl = 'https://newsapi.org/v2/everything?';
-    let queryString = `q=${formatedQuery}&page=1&apiKey=832ecf1cdf9741c19ffe553820ed8d60`
-    let url = baseUrl + queryString;
+function getNews(searchType, queryString){
+    let url = newsBaseUrl + searchType + '?' + queryString;
     console.log(url)
-    fetch(url)
+
+    let options = {
+        headers: new Headers({
+            "X-Api-Key": newsApiKey
+        })
+    };
+
+    fetch(url, options)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -91,39 +95,52 @@ function getNewsQuery(formatedQuery) {
         })
         .then(responseJson => displayNewsResults(responseJson))
         .catch(err => alert(`error:` + err));
-
 }
 
-function getNewsCountry(country) {
-    let baseUrl = 'https://newsapi.org/v2/top-headlines?';
-    let queryString = `country=${country}&apiKey=832ecf1cdf9741c19ffe553820ed8d60`;
-    let url = baseUrl + queryString;
-    fetch(url)
-        .then(response => response.json())
-        .then(responseJson => displayNewsResults(responseJson))
-        .catch(err => alert(`error:` + err))
+function buildNewsQueryUrl(formatedQuery) {
+    let params = {
+        q: formatedQuery,
+        page: 1
+    }
+
+    let searchType = 'everything';
+    let queryString = formatQueryParams(params);
+    getNews(searchType, queryString)
 }
 
-function getNews(country, formatedQuery) {
+function buildNewsCountryUrl(countryInput) {
+    let params = {
+        country: countryInput
+    }
+
+    let searchType = 'top-headlines';
+    let queryString = formatQueryParams(params);
+    getNews(searchType, queryString)
+    
+}
+
+function handleGettingNews(country, formatedQuery) {
     $('#js-news-results-list').empty();
-    getNewsQuery(formatedQuery);
-    getNewsCountry(country);
+    buildNewsQueryUrl(formatedQuery);
+    buildNewsCountryUrl(country);
 };
 
 function handleGetting(cityState, country, formatedQuery) {
     if ($('#news').is(':checked')) {
-        getNews(country, formatedQuery);
+        handleGettingNews(country, formatedQuery);
         $('#js-news-results').show();
         $('#js-weather-results').hide();
     }
-    else if ($('#weather').is(':checked')) {
-        getWeather(cityState);
+    else if ($('#weather').is(':checked')){
+        getWeather(cityState, "I");
+        getWeather(cityState, "M");
         $('#js-weather-results').show();
         $('#js-news-results').hide();
     }
     else {
-        getNews(country, formatedQuery);
-        getWeather(cityState);
+        handleGettingNews(country, formatedQuery);
+        getWeather(cityState, "I");
+        getWeather(cityState, "M");
         $('#js-weather-results').show();
         $('#js-news-results').show();
     }
@@ -134,7 +151,7 @@ function renderResultsScreen(state) {
     $('.results').show();
 };
 
-function formatQueryParams(params) {
+function formatParamsUri(params) {
     const queryItems = encodeURIComponent(params);
     console.log(queryItems);
     return queryItems;
@@ -155,8 +172,7 @@ function handleSubmit() {
         let country = $('option:selected').val();
         let cityState = combine(city, state);
         let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
-        console.log(newsCityState);
-        let formatedQuery = formatQueryParams(newsCityState);
+        let formatedQuery = formatParamsUri(newsCityState);
         handleGetting(cityState, country, formatedQuery);
         renderResultsScreen();
     });
