@@ -74,7 +74,8 @@ function getWeather(cityState, unitType) {
 let newsBaseUrl = 'https://newsapi.org/v2/'
 let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
 
-function getNews(searchType, queryString){
+function getNews(searchType, params){
+    let queryString = formatQueryParams(params);
     let url = newsBaseUrl + searchType + '?' + queryString;
     console.log(url)
 
@@ -104,8 +105,7 @@ function buildNewsQueryUrl(formatedQuery) {
     }
 
     let searchType = 'everything';
-    let queryString = formatQueryParams(params);
-    getNews(searchType, queryString)
+    getNews(searchType, params)
 }
 
 function buildNewsCountryUrl(countryInput) {
@@ -114,13 +114,13 @@ function buildNewsCountryUrl(countryInput) {
     }
 
     let searchType = 'top-headlines';
-    let queryString = formatQueryParams(params);
-    getNews(searchType, queryString)
+    getNews(searchType, params)
     
 }
 
 function handleGettingNews(country, formatedQuery) {
     $('#js-news-results-list').empty();
+    console.log(`\"handleGettingNews\" ran`)
     buildNewsQueryUrl(formatedQuery);
     buildNewsCountryUrl(country);
 };
@@ -132,23 +132,22 @@ function handleGetting(cityState, country, formatedQuery) {
         $('#js-weather-results').hide();
     }
     else if ($('#weather').is(':checked')){
+        $('#js-weather-results-I').empty();
         getWeather(cityState, "I");
+        $('#js-weather-results-M').empty();
         getWeather(cityState, "M");
         $('#js-weather-results').show();
         $('#js-news-results').hide();
     }
     else {
         handleGettingNews(country, formatedQuery);
+        $('#js-weather-results-I').empty();
         getWeather(cityState, "I");
+        $('#js-weather-results-M').empty();
         getWeather(cityState, "M");
         $('#js-weather-results').show();
         $('#js-news-results').show();
     }
-};
-
-function renderResultsScreen(state) {
-    $('.search').hide();
-    $('.results').show();
 };
 
 function formatParamsUri(params) {
@@ -174,18 +173,14 @@ function handleSubmit() {
         let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
         let formatedQuery = formatParamsUri(newsCityState);
         handleGetting(cityState, country, formatedQuery);
-        renderResultsScreen();
+        $('.results').show();
     });
 };
 
-function renderSearchScreen() {
-    $('.results').hide();
-    $('.search').show();
-    handleSubmit();
-};
 
 function handleExploreApp() {
-    renderSearchScreen();
+    $('.results').hide();
+    handleSubmit();
     returnSearch();
     handleUnitButtons();
 };
