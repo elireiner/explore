@@ -22,3 +22,6 @@ fieldset {
 .hidden {
     display: none;
 }
+.error-message {
+    color: red;
+}
