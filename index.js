@@ -32,9 +32,8 @@ function displayWeatherResults(responseJson, unitType) {
         <p>${responseJson.data[i].weather.description}</p>
         </div>`);
     }
+    $('.results').show();
 };
-
-
 
 function displayNewsResults(responseJson) {
     for (let i = 0; i < responseJson.articles.length; i++) {
@@ -44,6 +43,7 @@ function displayNewsResults(responseJson) {
     <p>Source name: ${responseJson.articles[i].source.name}</p>
     </li>`)
     }
+    $('.results').show();
 };
 
 function formatQueryParams(params) {
@@ -60,13 +60,19 @@ function getWeather(cityState, unitType) {
         units: unitType,
         city: cityState,
         key: weatherApiKey
-    } 
+    }
     let queryString = formatQueryParams(params)
     let url = weatherBaseUrl + queryString;
 
     console.log(url)
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
         .then(responseJson => displayWeatherResults(responseJson, unitType))
         .catch(err => alert(`error:` + err))
 };
@@ -74,7 +80,7 @@ function getWeather(cityState, unitType) {
 let newsBaseUrl = 'https://newsapi.org/v2/'
 let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
 
-function getNews(searchType, params){
+function getNews(searchType, params) {
     let queryString = formatQueryParams(params);
     let url = newsBaseUrl + searchType + '?' + queryString;
     console.log(url)
@@ -115,7 +121,7 @@ function buildNewsCountryUrl(countryInput) {
 
     let searchType = 'top-headlines';
     getNews(searchType, params)
-    
+
 }
 
 function handleGettingNews(country, formatedQuery) {
@@ -131,7 +137,7 @@ function handleGetting(cityState, country, formatedQuery) {
         $('#js-news-results').show();
         $('#js-weather-results').hide();
     }
-    else if ($('#weather').is(':checked')){
+    else if ($('#weather').is(':checked')) {
         $('#js-weather-results-I').empty();
         getWeather(cityState, "I");
         $('#js-weather-results-M').empty();
@@ -173,7 +179,6 @@ function handleSubmit() {
         let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
         let formatedQuery = formatParamsUri(newsCityState);
         handleGetting(cityState, country, formatedQuery);
-        $('.results').show();
     });
 };
 
