@@ -74,7 +74,9 @@ function getWeather(cityState, unitType) {
             }
         })
         .then(responseJson => displayWeatherResults(responseJson, unitType))
-        .catch(err => alert(`error:` + err))
+        .catch(err => {
+            $('#js-error-message-weather').empty().text(`Something went wrong: ${err.message}`).show();
+        })
 };
 
 let newsBaseUrl = 'https://newsapi.org/v2/'
@@ -101,7 +103,9 @@ function getNews(searchType, params) {
             }
         })
         .then(responseJson => displayNewsResults(responseJson))
-        .catch(err => alert(`error:` + err));
+        .catch(err => {
+            $('#js-error-message-news').empty().text(`Something went wrong: ${err.message}`).show();
+        })
 }
 
 function buildNewsQueryUrl(formatedQuery) {
@@ -126,7 +130,6 @@ function buildNewsCountryUrl(countryInput) {
 
 function handleGettingNews(country, formatedQuery) {
     $('#js-news-results-list').empty();
-    console.log(`\"handleGettingNews\" ran`)
     buildNewsQueryUrl(formatedQuery);
     buildNewsCountryUrl(country);
 };
@@ -168,10 +171,14 @@ function combine(city, state) {
     formatedCity = formatedCity + ',' + state;
     return formatedCity
 }
-
+function hideError(){
+    $('#js-error-message-weather').hide()
+    $('#js-error-message-news').hide()
+}
 function handleSubmit() {
     $('form').submit(function (event) {
         event.preventDefault();
+        hideError()
         let city = $('#city').val();
         let state = $('#state').val();
         let country = $('option:selected').val();
@@ -185,6 +192,7 @@ function handleSubmit() {
 
 function handleExploreApp() {
     $('.results').hide();
+    hideError()
     handleSubmit();
     returnSearch();
     handleUnitButtons();
