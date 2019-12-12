@@ -10,8 +10,9 @@
 </head>
 
 <body>
-    <main class="search">
-        <h1>Traveling? Explore your destination</h1>
+    <main >
+        <section class="search">
+            <h1>Traveling? Explore your destination</h1>
         <form class="form">
             <fieldset>
                 <legend>What do you want to see</legend>
@@ -291,10 +292,9 @@
             <button type="submit">Submit</button>
             <button type="reset">reset</button>
         </form>
-    </main>
-    
-    <main class="results">
-        <h1>Here are your results</h1>
+        </section>
+        <section class="results">
+            <h1>Here are your results</h1>
         <section id="js-weather-results">
             <h2>The weather</h2>
             <p id="js-error-message-weather" class="error-message"></p>
@@ -318,6 +318,7 @@
             </ul>
         </section>
         <button type="button" id="return">return</button>
+        </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
