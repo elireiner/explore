@@ -1,16 +1,10 @@
 body {
-    background-color: #D8E6F2;
-    color: #A0A603;
+   background-color: #F2F2F2;
+    color: #020F59
 }
-form{
-    border: 2.5px solid #AED3F2;
-}
-button {
-    color: #A0A603;
-}
+
 input {
-    background: rgb(233, 231, 241);
-    color: #A0A603;
+    border: 1px solid #024959;
 }
 fieldset {
     border: none;
@@ -23,5 +17,14 @@ fieldset {
     display: none;
 }
 .error-message {
-    color: red;
+    color: #8C2703;
 }
+
+
+/*colors{
+    #F2F2F2
+  
+    #8C6A03
+    #0339A6
+    #020F59
+}*/
