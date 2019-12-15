@@ -1,13 +1,23 @@
 body {
    background-color: #F2F2F2;
-    color: #020F59
+    color: #020F59;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5em;
 }
 
 input {
     border: 1px solid #024959;
+    background-color: white;
+}
+input[type="radio"]{
+    margin: 3px 3px 0px 5px;
 }
 fieldset {
     border: none;
+}
+button{
+    border: 1px solid #020F59;
+    background-color: #F2F2F2;
 }
 .weather-data, .weather-description{
     display: flex;
@@ -18,6 +28,9 @@ fieldset {
 }
 .error-message {
     color: #8C2703;
+}
+h1, h2{
+    text-align: center;
 }
 
 
