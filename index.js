@@ -26,10 +26,9 @@ function displayWeatherResults(responseJson, unitType) {
     for (let i = 0; i < responseJson.data.length; i++) {
         $(`#js-weather-results-${unitType}`).append(`
         <div class="weather-data">
-        <h3>Day: ${[i + 1]}</h3>
-        <img src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather">
-        <p>${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
-        <p>${responseJson.data[i].weather.description}</p>
+        <h3 class="day">Day: ${[i + 1]}</h3>
+        <img class="weather-img" src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather as ${responseJson.data[i].weather.description}">
+        <p class="temp">${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
         </div>`);
     }
     $('.results').show();

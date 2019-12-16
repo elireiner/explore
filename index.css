@@ -1,38 +1,80 @@
 body {
-   background-color: #F2F2F2;
+    background-color: #F2F2F2;
     color: #020F59;
     font-family: 'Roboto', sans-serif;
     line-height: 1.5em;
+}
+
+form {
+    width: 80%;
+    margin: auto;
 }
 
 input {
     border: 1px solid #024959;
     background-color: white;
 }
-input[type="radio"]{
+
+input[type="radio"] {
     margin: 3px 3px 0px 5px;
 }
+
 fieldset {
     border: none;
 }
-button{
+
+button {
     border: 1px solid #020F59;
     background-color: #F2F2F2;
 }
-.weather-data, .weather-description{
+
+.weather-data {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    border-bottom: #024959 1px solid;
 }
+
+.weather-description {
+    display: flex;
+}
+
+.weather-results{
+    width: 80%;
+    margin: auto;
+}
+
 .hidden {
     display: none;
+}
+
+h1 {
+    width: 80%;
+    margin: auto;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+.day{
+    width: 25%;
+    max-width: 80px;
+}
+.weather-img {
+    height: 60px;
+    width: 60px;
+}
+
+.temp{
+    width: 50%;
+    text-align: end;
 }
 .error-message {
     color: #8C2703;
 }
-h1, h2{
-    text-align: center;
-}
-
 
 /*colors{
     #F2F2F2
