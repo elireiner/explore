@@ -43,6 +43,7 @@ function displayNewsResults(responseJson) {
     </li>`)
     }
     $('.results').show();
+    //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
 };
 
 function formatQueryParams(params) {

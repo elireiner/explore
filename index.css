@@ -28,14 +28,11 @@ button {
     background-color: #F2F2F2;
 }
 
-.weather-data {
+.weather-data,
+.weather-description  {
     display: flex;
     justify-content: flex-start;
     border-bottom: #024959 1px solid;
-}
-
-.weather-description {
-    display: flex;
 }
 
 .weather-results{
@@ -59,18 +56,26 @@ h1,
 h2 {
     text-align: center;
 }
+.description-day{
+    width: 50%;
+}
 .day{
     width: 25%;
     max-width: 80px;
 }
+
 .weather-img {
     height: 60px;
     width: 60px;
 }
 
+.high-low {
+    width: 50%;
+    text-align: center;
+}
 .temp{
     width: 50%;
-    text-align: end;
+    text-align: center;
 }
 .error-message {
     color: #8C2703;
