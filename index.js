@@ -1,13 +1,5 @@
 'use strict'
 
-function returnSearch() {
-    $('#return').click(function (event) {
-        event.preventDefault();
-
-        $('.results').hide();
-        renderSearchScreen();
-    })
-}
 function handleUnitButtons() {
     $('#js-weather-results-M').hide();
     $('#js-f').click(event => {
@@ -26,7 +18,7 @@ function displayWeatherResults(responseJson, unitType) {
     for (let i = 0; i < responseJson.data.length; i++) {
         $(`#js-weather-results-${unitType}`).append(`
         <div class="weather-data">
-        <h3 class="day">Day: ${[i + 1]}</h3>
+        <h4 class="day">Day: ${[i + 1]}</h4>
         <img class="weather-img" src="weather-icons/${responseJson.data[i].weather.icon}.png" alt="An img depicting the weather as ${responseJson.data[i].weather.description}">
         <p class="temp">${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
         </div>`);
@@ -38,11 +30,13 @@ function displayNewsResults(responseJson) {
     for (let i = 0; i < responseJson.articles.length; i++) {
         $('#js-news-results-list').append(`
     <li>
-    <a href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
+    <a href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a>
     <p>Source name: ${responseJson.articles[i].source.name}</p>
     </li>`)
     }
     $('.results').show();
+
+    //This code will be helpful in displaying images for news articles:
     //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
 };
 
@@ -64,7 +58,6 @@ function getWeather(cityState, unitType) {
     let queryString = formatQueryParams(params)
     let url = weatherBaseUrl + queryString;
 
-    console.log(url)
     fetch(url)
         .then(response => {
             if (response.ok) {
@@ -75,6 +68,7 @@ function getWeather(cityState, unitType) {
         })
         .then(responseJson => displayWeatherResults(responseJson, unitType))
         .catch(err => {
+            $('#js-hide').hide();
             $('#js-error-message-weather').empty().text(`Something went wrong: ${err.message}`).show();
         })
 };
@@ -85,7 +79,6 @@ let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
 function getNews(searchType, params) {
     let queryString = formatQueryParams(params);
     let url = newsBaseUrl + searchType + '?' + queryString;
-    console.log(url)
 
     let options = {
         headers: new Headers({
@@ -161,7 +154,6 @@ function handleGetting(cityState, country, formatedQuery) {
 
 function formatParamsUri(params) {
     const queryItems = encodeURIComponent(params);
-    console.log(queryItems);
     return queryItems;
 }
 
@@ -179,6 +171,7 @@ function handleSubmit() {
     $('form').submit(function (event) {
         event.preventDefault();
         hideError()
+        $('#js-hide').show();
         let city = $('#city').val();
         let state = $('#state').val();
         let country = $('option:selected').val();
@@ -194,7 +187,6 @@ function handleExploreApp() {
     $('.results').hide();
     hideError()
     handleSubmit();
-    returnSearch();
     handleUnitButtons();
 };
 
