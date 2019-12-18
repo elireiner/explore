@@ -3,6 +3,7 @@ body {
     color: #020F59;
     font-family: 'Roboto', sans-serif;
     line-height: 1.5em;
+    box-sizing: border-box;
 }
 
 form {
@@ -21,6 +22,9 @@ input[type="radio"] {
 
 fieldset {
     border: none;
+    width: 100%;
+    padding-left: 0%;
+
 }
 
 button {
@@ -29,15 +33,17 @@ button {
 }
 
 .weather-data,
-.weather-description  {
+.weather-description {
     display: flex;
     justify-content: flex-start;
     border-bottom: #024959 1px solid;
+    height: 67px;;
 }
 
-.weather-results{
+.weather-results, .news-results {
     width: 80%;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 .hidden {
@@ -53,13 +59,30 @@ h1 {
 }
 
 h1,
-h2 {
+h2,
+h3 {
     text-align: center;
 }
-.description-day{
-    width: 50%;
+
+.description-day {
+    width: 25%;
+    max-width: 80px;
+    margin-right: 60px;
+
 }
-.day{
+.buttons-div{
+    height: 35px;
+   
+}
+.c,
+.f {
+    float: right;
+    margin-left: 7px;
+    width: 50px;
+    margin-top: 5px
+}
+
+.day {
     width: 25%;
     max-width: 80px;
 }
@@ -67,23 +90,26 @@ h2 {
 .weather-img {
     height: 60px;
     width: 60px;
+    margin-top: 7px;
 }
 
-.high-low {
+.temp, .high-low {
     width: 50%;
-    text-align: center;
+    float: right;
+    text-align: right;
 }
-.temp{
-    width: 50%;
-    text-align: center;
-}
+
 .error-message {
     color: #8C2703;
 }
 
+a, a:active, a:visited {
+    color: #0339A6
+}
+
 /*colors{
+    These are colors from the color palate I choose for this app
     #F2F2F2
-  
     #8C6A03
     #0339A6
     #020F59
