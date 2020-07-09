@@ -73,6 +73,7 @@ function getWeather(cityState, unitType) {
         })
 };
 
+//replace with new api
 let newsBaseUrl = 'https://newsapi.org/v2/'
 let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
 
@@ -108,7 +109,7 @@ function buildNewsQueryUrl(formatedQuery) {
     }
 
     let searchType = 'everything';
-    getNews(searchType, params)
+   // getNews(searchType, params)
 }
 
 function buildNewsCountryUrl(countryInput) {
@@ -117,20 +118,21 @@ function buildNewsCountryUrl(countryInput) {
     }
 
     let searchType = 'top-headlines';
-    getNews(searchType, params)
+    //getNews(searchType, params)
 
 }
 
 function handleGettingNews(country, formatedQuery) {
     $('#js-news-results-list').empty();
-    buildNewsQueryUrl(formatedQuery);
-    buildNewsCountryUrl(country);
+   // buildNewsQueryUrl(formatedQuery);
+    //buildNewsCountryUrl(country);
 };
 
 function handleGetting(cityState, country, formatedQuery) {
     if ($('#news').is(':checked')) {
-        handleGettingNews(country, formatedQuery);
+      //  handleGettingNews(country, formatedQuery);
         $('#js-news-results').show();
+        $('.results').show();
         $('#js-weather-results').hide();
     }
     else if ($('#weather').is(':checked')) {
