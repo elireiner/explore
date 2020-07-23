@@ -69,7 +69,7 @@ function getWeather(cityState, unitType) {
         .then(responseJson => displayWeatherResults(responseJson, unitType))
         .catch(err => {
             $('#js-hide').hide();
-            $('#js-error-message-weather').empty().text(`Something went wrong: ${err.message}`).show();
+            $('#js-error-message-weather').empty().text(`Something went wrong: you probably need to change your input`).show();
         })
 };
 
