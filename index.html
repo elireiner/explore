@@ -13,31 +13,41 @@
 <body>
     <main>
         <section class="search">
-            <h1>Traveling? <br> Explore your destination</h1>
-            <form class="form">
-                <fieldset>
-                    <legend>What do you want to see?</legend>
-                    <label for="news">The news</label>
-                    <input type="radio" id="news" name="option">
-                    <br>
-                    <label for="weather">The weather</label>
-                    <input type="radio" id="weather" name="option">
-                    <br>
-                    <label for="both">Both</label>
-                    <input type="radio" id="both" name="option" checked>
-                </fieldset>
+            <nav></nav>
+            <header class="header">
+                <h1>News and weather</h1>
+                <p class="travel-question">Where are you traveling to?</p>
+            </header>
+            <div class="form-wrapper">
+                <form class="form">
+                    <!--<fieldset>
+                        <legend>What do you want to see?</legend>
+                        <label for="news">The news</label>
+                        <input type="radio" id="news" name="option">
+                        <br>
+                        <label for="weather">The weather</label>
+                        <input type="radio" id="weather" name="option">
+                        <br>
+                        <label for="both">Both</label>
+                        <input type="radio" id="both" name="option" checked>
+                    </fieldset>-->
 
-                <fieldset>
-                    <legend>Enter your destination</legend>
+                    <div class="white">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="e.g. Palo Alto" required>
+                    </div>
 
-                    <label for="city">City</label>
-                    <input type="text" id="city" placeholder="e.g. Palo Alto" required>
-                    <br>
-                    <label for="state">State</label>
-                    <input type="text" id="state" placeholder="e.g. California" required>
-                </fieldset>
+                    <div class="white">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="e.g. California" required>
+                    </div>
 
-                <label for="country">Select country</label>
+                    <div class="white">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="e.g. California" required>
+                    </div>
+
+                    <!--<label for="country">Select country</label>
                 <select id="country">
                     <option value="US" selected>United States</option>
                     <option value="AF">Afghanistan</option>
@@ -288,11 +298,11 @@
                     <option value="YE">Yemen</option>
                     <option value="ZM">Zambia</option>
                     <option value="ZW">Zimbabwe</option>
-                </select>
-                <br>
-                <button type="submit">Submit</button>
-                <button type="reset">reset</button>
-            </form>
+                </select>-->
+                    <button class="explore-button" type="submit">Explore</button>
+                </form>
+            </div>
+
         </section>
         <section class="results">
             <h2>Here are your results</h2>
