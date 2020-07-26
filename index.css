@@ -9,12 +9,13 @@ body {
 
 .header {
     background-color: #307897;
-    height: 20vh;
+    height: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #FFF8D6;
+    margin-bottom: 7vh;
 }
 
 h1,
@@ -29,59 +30,100 @@ h1 {
     font-weight: bold;
 }
 
-.travel-question {
-    font-size: 24px;
-    margin: 20px 0;
-    font-weight: bold;
-}
-
 .form-wrapper {
     width: 80%;
     margin: auto;
     padding: 5px;
-    background-color: #B32E46;
-    height: 40vh;
+    background-color: #D04356;
+    height: 45vh;
+}
+
+.travel-question {
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
+
+form {
+    width: 100%;
 }
 
 .white {
     background-color: #F2F2F2;
     width: 80%;
-    margin: 20px auto; 
-
+    margin: 20px auto;
 }
 
-input, .explore-button {
+input,
+.explore-button {
     padding: 5px;
 }
 
-label, input, .explore-button {
+label,
+input,
+.explore-button {
     border: 0;
     display: block;
-    padding-left: 5px;
+    padding: 3px;
+    height: 22px;
     background-color: #F2F2F2;
-}
-
-.country {
     width: 100%;
 }
 
-.explore-button {
-    height: 35px;
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    height: 200px;
     width: 80%;
-    margin: 35px auto;
-    background-color: #EA9900;
+    margin: 20px auto
+}
+
+.white-country, .white-country > input {
+    background-color: #F2F2F2;
+    margin-bottom: 40px;
+}
+
+.white-country > input {
+    margin: 0;
+}
+
+.country-input {
+    height: 30px;
+    margin-bottom: 50px;
+}
+
+ul {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    background-color: #F2F2F2;
+    top: 36.5px;
+    padding: 0;
+}
+
+
+li {
+    padding-left: 40px;
+
 }
 
 .results {
     background-color: #42C8FF;
 }
+
 .weather-data,
 .weather-description {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 24px;
     height: 67px;
-    background-color:#307897;
+    background-color: #307897;
     color: #FFF8D6;
     padding-left: 10px;
     font-size: 18px;
