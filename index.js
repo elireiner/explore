@@ -1,5 +1,34 @@
 'use strict'
 
+$.getScript('filter.js', function () {
+    filter
+});
+
+function handleCountryClick() {
+    $("#country-list").on( "click", 'li', function () {
+        $("#country").val(null)
+        $("#country").val($(this).text())
+    })
+}
+
+function handleFilter() {
+    $("#country").keyup(function () {
+        let input = $('#country').val()
+        filter(input)
+        $(`#country-list`).empty().append(filter(input))
+    });
+}
+
+
+function handleCountries() {
+    $('#country-list').hide();
+    $('#country').click(function () {
+        $("#country-list").show();
+    });
+    handleFilter()
+    handleCountryClick()
+}
+
 function handleUnitButtons() {
     $('#js-weather-results-M').hide();
     $('#js-f').click(event => {
@@ -109,7 +138,7 @@ function buildNewsQueryUrl(formatedQuery) {
     }
 
     let searchType = 'everything';
-   // getNews(searchType, params)
+    // getNews(searchType, params)
 }
 
 function buildNewsCountryUrl(countryInput) {
@@ -124,13 +153,13 @@ function buildNewsCountryUrl(countryInput) {
 
 function handleGettingNews(country, formatedQuery) {
     $('#js-news-results-list').empty();
-   // buildNewsQueryUrl(formatedQuery);
+    // buildNewsQueryUrl(formatedQuery);
     //buildNewsCountryUrl(country);
 };
 
 function handleGetting(cityState, country, formatedQuery) {
     if ($('#news').is(':checked')) {
-      //  handleGettingNews(country, formatedQuery);
+        //  handleGettingNews(country, formatedQuery);
         $('#js-news-results').show();
         $('.results').show();
         $('#js-weather-results').hide();
@@ -165,10 +194,20 @@ function combine(city, state) {
     formatedCity = formatedCity + ',' + state;
     return formatedCity
 }
-function hideError(){
+function hideError() {
     $('#js-error-message-weather').hide()
     $('#js-error-message-news').hide()
 }
+
+function getCountryId() {
+    //make sure to also get the id from the input 
+    //by comparing input to object in filter file 
+    //this will help when a user enters the in input without clicking li
+    $("#country-list li").click(function () {
+        return $(this).attr('id')
+    })
+}
+
 function handleSubmit() {
     $('form').submit(function (event) {
         event.preventDefault();
@@ -176,7 +215,7 @@ function handleSubmit() {
         $('#js-hide').show();
         let city = $('#city').val();
         let state = $('#state').val();
-        let country = $('option:selected').val();
+        let country = getCountryId()
         let cityState = combine(city, state);
         let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
         let formatedQuery = formatParamsUri(newsCityState);
@@ -186,6 +225,7 @@ function handleSubmit() {
 
 
 function handleExploreApp() {
+    handleCountries()
     $('.results').hide();
     hideError()
     handleSubmit();
