@@ -1,0 +1,19 @@
+{
+  "name": "explore",
+  "version": "1.0.0",
+  "description": "Explore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elireiner/explore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elireiner/explore/issues"
+  },
+  "homepage": "https://github.com/elireiner/explore#readme"
+}
