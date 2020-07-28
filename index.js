@@ -3,6 +3,7 @@
 $.getScript('filter.js', function () {
     filter;
     getId;
+    reduceLength;
 });
 
 function handleCountryClick() {
@@ -93,9 +94,12 @@ function displayNewsResults(responseJson) {
     console.log(responseJson)
     for (let i = 0; i < responseJson.news.length; i++) {
         $('#js-news-results-list').append(`
-    <li>
-    <a href="${responseJson.news[i].url}" target="_blank">${responseJson.news[i].title}</a>
-    <p>Author: ${responseJson.news[i].author}</p>
+    <li class="news-item">
+    <a href="${responseJson.news[i].url}" target="_blank">${reduceLength(responseJson.news[i].title)}</a>
+    ${
+            //<p>Author: ${responseJson.news[i].author}</p>
+            //The data in this field is inconsistent
+            ''}
     </li>`)
     }
     $('.results').show();
@@ -112,6 +116,7 @@ function getNews(country) {
     let params = {
         country: country,
         language: 'en',
+        domain_not: "arxiv.org",
         apiKey: newsApiKey
     }
 
