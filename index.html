@@ -30,9 +30,9 @@
                         <input type="text" id="state" placeholder="e.g. California" required>
                     </div>
                     <div class="container">
-                        <div class="white-country">
+                        <div id="js-white-country" class="white-country">
                             <label for="country">Country <span id="invalid-country">Invalid country</span></label>
-                            <input class="input country-input" id="country" type="text" />
+                            <input class="input country-input" placeholder="e.g. United States" id="country" type="text" />
                         </div>
                         <ul id='js-country-list' class="country-list">
                             <li id="US">United States</li>
@@ -72,7 +72,7 @@
             </div>
 
         </section>
-        <section class="results">
+        <section id="js-results" class="results">
             <h2>Here are your results</h2>
             <section id="js-weather-results" class="weather-results">
                 <h3>The weather</h3>
@@ -99,6 +99,7 @@
                 <p id="js-error-message-news" class="error-message"></p>
                 <ul id="js-news-results-list" class="news-results-list">
                 </ul>
+                <p id="js-no-news-message" class="no-news-message">Were sorry, we haven't found any new for this country</p>
             </section>
         </section>
     </main>
