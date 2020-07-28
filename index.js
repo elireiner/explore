@@ -6,6 +6,21 @@ $.getScript('filter.js', function () {
     reduceLength;
 });
 
+$(document).mouseup(function (e)
+{
+    var container = new Array();
+    container.push($('#js-country-list'));
+    container.push($('#js-white-country'));
+    
+    $.each(container, function(key, value) {
+        if (!$(value).is(e.target) // if the target of the click isn't the container...
+            && $(value).has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            $("#js-country-list").hide();
+        }
+    });
+});
+
 function handleCountryClick() {
     $("#js-country-list").on("click", 'li', function () {
         $("#country").val(null)
@@ -54,7 +69,7 @@ function displayWeatherResults(responseJson, unitType) {
         <p class="temp">${responseJson.data[i].high_temp}°/${responseJson.data[i].low_temp}°</p>
         </div>`);
     }
-    $('.results').show();
+    $('#js-results').show();
 };
 
 function formatQueryParams(params) {
@@ -102,7 +117,7 @@ function displayNewsResults(responseJson) {
             ''}
     </li>`)
     }
-    $('.results').show();
+    $('#js-results').show();
 
     //This code will be helpful in displaying images for news articles:
     //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
@@ -190,11 +205,15 @@ function handleSubmit() {
     });
 };
 
+function hideElements() {
+    $('#invalid-country').hide()
+    $('#js-results').hide();
+    $('#js-no-news-message').hide();
+}
 
 function handleExploreApp() {
     handleCountries()
-    $('#invalid-country').hide()
-    $('.results').hide();
+    hideElements()
     hideError()
     handleSubmit();
     handleUnitButtons();
