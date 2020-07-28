@@ -96,7 +96,7 @@ input,
     margin-bottom: 50px;
 }
 
-ul {
+.country-list {
     height: 200px;
     width: 100%;
     overflow: hidden;
@@ -108,7 +108,7 @@ ul {
 }
 
 
-li {
+.country-list > li {
     padding-left: 40px;
 
 }
