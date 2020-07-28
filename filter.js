@@ -271,3 +271,17 @@ function getId(country) {
     }
     return 'anError';
 }
+
+function reduceLength(headline) {
+    let words = headline.split(' ');
+    if (words.length > 10) {
+        if (headline.length > 45){
+            words.splice(7);
+        } else {
+             words.splice(9)
+        }
+        words.push('... read more')
+        return words.join(' ')
+    }
+    return headline
+}
