@@ -1,11 +1,12 @@
 'use strict'
 
 $.getScript('filter.js', function () {
-    filter
+    filter;
+    getId;
 });
 
 function handleCountryClick() {
-    $("#country-list").on( "click", 'li', function () {
+    $("#country-list").on("click", 'li', function () {
         $("#country").val(null)
         $("#country").val($(this).text())
     })
@@ -55,20 +56,6 @@ function displayWeatherResults(responseJson, unitType) {
     $('.results').show();
 };
 
-function displayNewsResults(responseJson) {
-    for (let i = 0; i < responseJson.articles.length; i++) {
-        $('#js-news-results-list').append(`
-    <li>
-    <a href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a>
-    <p>Source name: ${responseJson.articles[i].source.name}</p>
-    </li>`)
-    }
-    $('.results').show();
-
-    //This code will be helpful in displaying images for news articles:
-    //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
-};
-
 function formatQueryParams(params) {
     let queryItems = Object.keys(params)
         .map(key => `${key}=${params[key]}`)
@@ -98,25 +85,44 @@ function getWeather(cityState, unitType) {
         .then(responseJson => displayWeatherResults(responseJson, unitType))
         .catch(err => {
             $('#js-hide').hide();
-            $('#js-error-message-weather').empty().text(`Something went wrong: you probably need to change your input`).show();
+            $('#js-error-message-weather').empty().text(`Something went wrong: ${err.message}`).show();
         })
 };
 
-//replace with new api
-let newsBaseUrl = 'https://newsapi.org/v2/'
-let newsApiKey = '832ecf1cdf9741c19ffe553820ed8d60';
+function displayNewsResults(responseJson) {
+    console.log(responseJson)
+    for (let i = 0; i < responseJson.news.length; i++) {
+        $('#js-news-results-list').append(`
+    <li>
+    <a href="${responseJson.news[i].url}" target="_blank">${responseJson.news[i].title}</a>
+    <p>Author: ${responseJson.news[i].author}</p>
+    </li>`)
+    }
+    $('.results').show();
 
-function getNews(searchType, params) {
+    //This code will be helpful in displaying images for news articles:
+    //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
+};
+
+let newsBaseUrl = 'https://api.currentsapi.services/v1/search'
+let newsApiKey = 'LViWVggw4c3qYA8wJv7trnhs9j3K6gkavCz9zZPGK2h1cX8c';
+
+function getNews(country) {
+
+    let params = {
+        country: country,
+        language: 'en',
+        apiKey: newsApiKey
+    }
+
     let queryString = formatQueryParams(params);
-    let url = newsBaseUrl + searchType + '?' + queryString;
+    let url = newsBaseUrl + '?' + queryString;
 
-    let options = {
-        headers: new Headers({
-            "X-Api-Key": newsApiKey
-        })
-    };
+    console.log(url)
 
-    fetch(url, options)
+    let req = new Request(url);
+
+    fetch(req)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -131,62 +137,22 @@ function getNews(searchType, params) {
         })
 }
 
-function buildNewsQueryUrl(formatedQuery) {
-    let params = {
-        q: formatedQuery,
-        page: 1
-    }
-
-    let searchType = 'everything';
-    // getNews(searchType, params)
-}
-
-function buildNewsCountryUrl(countryInput) {
-    let params = {
-        country: countryInput
-    }
-
-    let searchType = 'top-headlines';
-    //getNews(searchType, params)
-
-}
-
-function handleGettingNews(country, formatedQuery) {
+function handleGettingNews(country) {
     $('#js-news-results-list').empty();
-    // buildNewsQueryUrl(formatedQuery);
-    //buildNewsCountryUrl(country);
+    getNews(country)
 };
 
-function handleGetting(cityState, country, formatedQuery) {
-    if ($('#news').is(':checked')) {
-        //  handleGettingNews(country, formatedQuery);
-        $('#js-news-results').show();
-        $('.results').show();
-        $('#js-weather-results').hide();
-    }
-    else if ($('#weather').is(':checked')) {
-        $('#js-weather-results-I').empty();
-        getWeather(cityState, "I");
-        $('#js-weather-results-M').empty();
-        getWeather(cityState, "M");
-        $('#js-weather-results').show();
-        $('#js-news-results').hide();
-    }
-    else {
-        handleGettingNews(country, formatedQuery);
-        $('#js-weather-results-I').empty();
-        getWeather(cityState, "I");
-        $('#js-weather-results-M').empty();
-        getWeather(cityState, "M");
-        $('#js-weather-results').show();
-        $('#js-news-results').show();
-    }
-};
+function handleGetting(cityState, country) {
 
-function formatParamsUri(params) {
-    const queryItems = encodeURIComponent(params);
-    return queryItems;
-}
+    handleGettingNews(country);
+    $('#js-weather-results-I').empty();
+    getWeather(cityState, "I");
+    $('#js-weather-results-M').empty();
+    getWeather(cityState, "M");
+    $('#js-weather-results').show();
+    $('#js-news-results').show();
+
+};
 
 function combine(city, state) {
     let formatedCity = city.split(' ');
@@ -199,13 +165,10 @@ function hideError() {
     $('#js-error-message-news').hide()
 }
 
-function getCountryId() {
-    //make sure to also get the id from the input 
-    //by comparing input to object in filter file 
-    //this will help when a user enters the in input without clicking li
-    $("#country-list li").click(function () {
-        return $(this).attr('id')
-    })
+function handleInvalidCountry(country) {
+    if (country == "anError") {
+        $('#invalid-country').show()
+    }
 }
 
 function handleSubmit() {
@@ -215,17 +178,17 @@ function handleSubmit() {
         $('#js-hide').show();
         let city = $('#city').val();
         let state = $('#state').val();
-        let country = getCountryId()
+        let country = getId($("#country").val())
+        handleInvalidCountry(country)
         let cityState = combine(city, state);
-        let newsCityState = `"` + city + `"` + ` AND ` + `"` + state + `"`;
-        let formatedQuery = formatParamsUri(newsCityState);
-        handleGetting(cityState, country, formatedQuery);
+        handleGetting(cityState, country);
     });
 };
 
 
 function handleExploreApp() {
     handleCountries()
+    $('#invalid-country').hide()
     $('.results').hide();
     hideError()
     handleSubmit();

@@ -31,8 +31,8 @@
                     </div>
                     <div class="container">
                         <div class="white-country">
-                            <label for="country">State</label>
-                            <input class="input country-input" value="" id="country" type="text" />
+                            <label for="country">Country <span id="invalid-country">Invalid country</span></label>
+                            <input class="input country-input" id="country" type="text" />
                         </div>
                         <ul id='country-list'>
                             <li id="US">United States</li>
@@ -96,7 +96,6 @@
             </section>
             <section id="js-news-results" class="news-results">
                 <h3>The news</h3>
-                <p>We're working on bringing you the news. Stay tuned...</p>
                 <p id="js-error-message-news" class="error-message"></p>
                 <ul id="js-news-results-list">
                 </ul>
