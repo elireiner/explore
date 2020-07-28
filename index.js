@@ -7,7 +7,7 @@ $.getScript('filter.js', function () {
 });
 
 function handleCountryClick() {
-    $("#country-list").on("click", 'li', function () {
+    $("#js-country-list").on("click", 'li', function () {
         $("#country").val(null)
         $("#country").val($(this).text())
     })
@@ -17,15 +17,15 @@ function handleFilter() {
     $("#country").keyup(function () {
         let input = $('#country').val()
         filter(input)
-        $(`#country-list`).empty().append(filter(input))
+        $(`#js-country-list`).empty().append(filter(input))
     });
 }
 
 
 function handleCountries() {
-    $('#country-list').hide();
+    $('#js-country-list').hide();
     $('#country').click(function () {
-        $("#country-list").show();
+        $("#js-country-list").show();
     });
     handleFilter()
     handleCountryClick()
