@@ -259,5 +259,15 @@ function filter(input) {
             results += `<li id="${keys[i]}">${countriesObject[keys[i]]}</li>`
         }
     }
-   return results;
+    return results;
+}
+
+function getId(country) {
+    const keys = Object.keys(countriesObject);
+    for (let i = 0; i < keys.length; i++) {
+        if (countriesObject[keys[i]].toLowerCase() === country.toLowerCase()) {
+            return keys[i];
+        }
+    }
+    return 'anError';
 }
