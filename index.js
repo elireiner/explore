@@ -6,13 +6,12 @@ $.getScript('filter.js', function () {
     reduceLength;
 });
 
-$(document).mouseup(function (e)
-{
+$(document).mouseup(function (e) {
     var container = new Array();
     container.push($('#js-country-list'));
     container.push($('#js-white-country'));
-    
-    $.each(container, function(key, value) {
+
+    $.each(container, function (key, value) {// the 'value' is each container item
         if (!$(value).is(e.target) // if the target of the click isn't the container...
             && $(value).has(e.target).length === 0) // ... nor a descendant of the container
         {
@@ -151,7 +150,14 @@ function getNews(country) {
                 throw new Error(response.statusText);
             }
         })
-        .then(responseJson => displayNewsResults(responseJson))
+        .then(responseJson => {
+            if (responseJson.news.length === 0) {
+                $('#js-no-news-message').show();
+            }
+            else {
+                displayNewsResults(responseJson)
+            }
+        })
         .catch(err => {
             $('#js-error-message-news').empty().text(`Something went wrong: ${err.message}`).show();
         })
