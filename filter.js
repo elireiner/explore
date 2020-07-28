@@ -265,7 +265,8 @@ function filter(input) {
 function getId(country) {
     const keys = Object.keys(countriesObject);
     for (let i = 0; i < keys.length; i++) {
-        if (countriesObject[keys[i]].toLowerCase() === country.toLowerCase()) {
+        if (countriesObject[keys[i]].toLowerCase() === country.toLowerCase() || 
+        countriesObject[keys[i]].toLowerCase() === country.toLowerCase().trim()) {
             return keys[i];
         }
     }
@@ -276,7 +277,7 @@ function reduceLength(headline) {
     let words = headline.split(' ');
     if (words.length > 10) {
         if (headline.length > 45){
-            words.splice(7);
+            words.splice(5);
         } else {
              words.splice(9)
         }
