@@ -281,7 +281,7 @@ function reduceLength(headline) {
         } else {
              words.splice(9)
         }
-        words.push('... read more')
+        words[words.length - 1] =  words[words.length - 1] + ' ...'
         return words.join(' ')
     }
     return headline
