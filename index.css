@@ -110,13 +110,13 @@ ul {
     position: absolute;
     background-color: #F2F2F2;
     top: 36.5px;
-    padding: 0;
+    margin-top: 27px;
+    padding: 5px 0 0 0;
 }
 
 
 .country-list>li {
-    padding-left: 40px;
-
+    padding-left: 20px;
 }
 
 .results {
