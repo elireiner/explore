@@ -22,7 +22,7 @@ $(document).mouseup(function (e) {
 
 function handleCountryClick() {
     $("#js-country-list").on("click", 'li', function () {
-        $("#country").val(null)
+        $("#country").empty()
         $("#country").val($(this).text())
     })
 }
@@ -186,6 +186,7 @@ function combine(city, state) {
     formatedCity = formatedCity + ',' + state;
     return formatedCity
 }
+
 function hideError() {
     $('#js-error-message-weather').hide()
     $('#js-error-message-news').hide()
