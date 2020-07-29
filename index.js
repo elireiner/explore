@@ -6,6 +6,7 @@ $.getScript('filter.js', function () {
     reduceLength;
 });
 
+//this will hide the country list dropdown when a user click outside
 $(document).mouseup(function (e) {
     var container = new Array();
     container.push($('#js-country-list'));
@@ -27,10 +28,10 @@ function handleCountryClick() {
     })
 }
 
+//filter the content of the country list bast on current user input
 function handleFilter() {
     $("#country").keyup(function () {
         let input = $('#country').val()
-        filter(input)
         $(`#js-country-list`).empty().append(filter(input))
     });
 }
@@ -86,6 +87,7 @@ function getWeather(cityState, unitType) {
         city: cityState,
         key: weatherApiKey
     }
+
     let queryString = formatQueryParams(params)
     let url = weatherBaseUrl + queryString;
 
@@ -105,7 +107,6 @@ function getWeather(cityState, unitType) {
 };
 
 function displayNewsResults(responseJson) {
-    console.log(responseJson)
     for (let i = 0; i < responseJson.news.length; i++) {
         $('#js-news-results-list').append(`
     <li class="news-item">
@@ -117,9 +118,6 @@ function displayNewsResults(responseJson) {
     </li>`)
     }
     $('#js-results').show();
-
-    //This code will be helpful in displaying images for news articles:
-    //<img src="${responseJson.articles[i].urlToImage}" alt="An img about this news article">
 };
 
 let newsBaseUrl = 'https://api.currentsapi.services/v1/search'
@@ -136,8 +134,6 @@ function getNews(country) {
 
     let queryString = formatQueryParams(params);
     let url = newsBaseUrl + '?' + queryString;
-
-    console.log(url)
 
     let req = new Request(url);
 
@@ -192,11 +188,20 @@ function hideError() {
     $('#js-error-message-news').hide()
 }
 
-function handleInvalidCountry(country) {
-    if (country == "anError") {
-        $('#invalid-country').show()
+$("#country").on("input", function () {
+    let country = getId($("#country").val())
+    if ($("#country").val()) {
+        if (country == "anError") {
+            $('.invalid-country').text('Invalid Country')
+        } else {
+            $('.invalid-country').text('Country')
+        }
+    } else {
+        $('.invalid-country').text('Country')
     }
-}
+})
+
+$("docunemt").$("#country").val()
 
 function handleSubmit() {
     $('form').submit(function (event) {
@@ -206,21 +211,23 @@ function handleSubmit() {
         let city = $('#city').val();
         let state = $('#state').val();
         let country = getId($("#country").val())
-        handleInvalidCountry(country)
         let cityState = combine(city, state);
         handleGetting(cityState, country);
     });
 };
 
 function hideElements() {
-    $('#invalid-country').hide()
+    $('#js-invalid-country').hide()
     $('#js-results').hide();
     $('#js-no-news-message').hide();
 }
 
+
 function handleExploreApp() {
-    handleCountries()
     hideElements()
+
+    //set country list to hidden by default
+    handleCountries()
     hideError()
     handleSubmit();
     handleUnitButtons();
