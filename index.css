@@ -126,6 +126,19 @@ ul {
     background-color: #42C8FF;
 }
 
+.links-home,
+.moving-links {
+    height: 75px;
+    text-align: center;
+}
+
+.moving-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .weather-data,
 .weather-description {
     display: flex;

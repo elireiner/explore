@@ -1,9 +1,68 @@
 'use strict'
-
 $.getScript('filter.js', function () {
     filter;
     getId;
     reduceLength;
+});
+
+$("#js-weather-link").click(function () {
+    $('html, body').animate({
+        scrollTop: $("#js-weather-results").offset().top - 200
+    }, 3000);
+    $("#js-weather-header").show()
+    setTimeout(function () {
+        $('#js-moving-links').css({
+            position: 'fixed',
+            top: 0,
+            "background-color": "#D04356",
+            display: "flex",
+            "flex-direction": "column",
+            "justify-content": "center",
+            "align-items": "center",
+            "width": "100vw",
+            "color": "#000000"
+        })
+    }, 4000)
+
+});
+
+$("#js-news-link").click(function () {
+    $('html, body').animate({
+        scrollTop: $("#js-news-results").offset().top - 200
+    }, 3000);
+    setTimeout(function () {
+        $('#js-moving-links').css({
+            position: 'fixed',
+            top: 0,
+            "background-color": "#D04356",
+            display: "flex",
+            "flex-direction": "column",
+            "justify-content": "center",
+            "align-items": "center",
+            "width": "100vw",
+            "color": "#000000"
+        })
+    }, 4000)
+});
+
+$("#js-news-link").click(function () {
+    $('html, body').animate({
+        scrollTop: $("#js-news-results").offset().top - 200
+    }, 4000);
+    setTimeout(function () {
+        $('#js-moving-links').css({
+            position: 'fixed',
+            top: 0,
+            
+            "background-color": "#D04356",
+            display: "flex",
+            "flex-direction": "column",
+            "justify-content": "center",
+            "align-items": "center",
+            "width": "100vw",
+            "color": "#000000"
+        })
+    }, 5000)
 });
 
 //this will hide the country list dropdown when a user click outside
@@ -201,8 +260,6 @@ $("#country").on("input", function () {
     }
 })
 
-$("docunemt").$("#country").val()
-
 function handleSubmit() {
     $('form').submit(function (event) {
         event.preventDefault();
@@ -220,6 +277,7 @@ function hideElements() {
     $('#js-invalid-country').hide()
     $('#js-results').hide();
     $('#js-no-news-message').hide();
+    $("#js-weather-header").hide()
 }
 
 
