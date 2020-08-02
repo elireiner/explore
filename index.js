@@ -7,7 +7,7 @@ $.getScript('filter.js', function () {
 
 $("#js-weather-link").click(function () {
     $('html, body').animate({
-        scrollTop: $("#js-weather-results").offset().top - 200
+        scrollTop: $("#js-weather-results").offset().top - 150
     }, 3000);
     $("#js-weather-header").show()
     setTimeout(function () {
@@ -28,7 +28,7 @@ $("#js-weather-link").click(function () {
 
 $("#js-news-link").click(function () {
     $('html, body').animate({
-        scrollTop: $("#js-news-results").offset().top - 200
+        scrollTop: $("#js-news-results").offset().top - 150
     }, 3000);
     setTimeout(function () {
         $('#js-moving-links').css({
