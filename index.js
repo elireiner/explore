@@ -262,6 +262,7 @@ $("#country").on("input", function () {
 
 function handleSubmit() {
     $('form').submit(function (event) {
+        $('#js-no-news-message').hide();
         event.preventDefault();
         hideError()
         $('#js-hide').show();
