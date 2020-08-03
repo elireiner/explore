@@ -5,64 +5,24 @@ $.getScript('filter.js', function () {
     reduceLength;
 });
 
-$("#js-weather-link").click(function () {
+$("#js-moving-weather-link, #js-weather-link").click(function () {
     $('html, body').animate({
         scrollTop: $("#js-weather-results").offset().top - 150
     }, 3000);
     $("#js-weather-header").show()
     setTimeout(function () {
-        $('#js-moving-links').css({
-            position: 'fixed',
-            top: 0,
-            "background-color": "#D04356",
-            display: "flex",
-            "flex-direction": "column",
-            "justify-content": "center",
-            "align-items": "center",
-            "width": "100vw",
-            "color": "#000000"
-        })
+        $('#js-moving-links').show()
     }, 4000)
 
 });
 
-$("#js-news-link").click(function () {
+$("#js-moving-news-link, #js-news-link").click(function () {
     $('html, body').animate({
         scrollTop: $("#js-news-results").offset().top - 150
     }, 3000);
     setTimeout(function () {
-        $('#js-moving-links').css({
-            position: 'fixed',
-            top: 0,
-            "background-color": "#D04356",
-            display: "flex",
-            "flex-direction": "column",
-            "justify-content": "center",
-            "align-items": "center",
-            "width": "100vw",
-            "color": "#000000"
-        })
+        $('#js-moving-links').show()
     }, 4000)
-});
-
-$("#js-news-link").click(function () {
-    $('html, body').animate({
-        scrollTop: $("#js-news-results").offset().top - 200
-    }, 4000);
-    setTimeout(function () {
-        $('#js-moving-links').css({
-            position: 'fixed',
-            top: 0,
-            
-            "background-color": "#D04356",
-            display: "flex",
-            "flex-direction": "column",
-            "justify-content": "center",
-            "align-items": "center",
-            "width": "100vw",
-            "color": "#000000"
-        })
-    }, 5000)
 });
 
 //this will hide the country list dropdown when a user click outside
@@ -279,6 +239,7 @@ function hideElements() {
     $('#js-results').hide();
     $('#js-no-news-message').hide();
     $("#js-weather-header").hide()
+    $("#js-moving-links").hide()
 }
 
 
