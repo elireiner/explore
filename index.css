@@ -33,11 +33,12 @@ h1 {
 .form-wrapper {
     width: 76%;
     margin: auto;
-    /*we need padding do the margin of 
+    /*we need padding so the margin of 
     the travel question doesn't move out of the this element*/
     padding-top: 0.1px;
     background-color: #D04356;
-    height: 45vh;
+    height: 47vh;
+    line-height: 1;
 }
 
 .travel-question {
@@ -53,18 +54,13 @@ h1 {
 
 form {
     width: 100%;
-    height: 38vh;
+    height: 39vh;
 }
 
 .white {
     background-color: #F2F2F2;
     width: 80%;
-    margin: 20px auto;
-}
-
-input,
-.explore-button {
-    padding: 5px;
+    margin: 3vh auto;
 }
 
 label,
@@ -72,8 +68,8 @@ input,
 .explore-button {
     border: 0;
     display: block;
-    padding: 3px;
-    height: 22px;
+    padding: .5vh;
+    height: 2.5vh;
     background-color: #F2F2F2;
     width: 100%;
 }
@@ -83,15 +79,13 @@ input,
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 130px;
     width: 80%;
     margin: 20px auto 0 auto;
 }
 
-.white-country,
-.white-country>input {
+.white-country{
     background-color: #F2F2F2;
-    margin-bottom: 40px;
+    margin-bottom: 4.5vh;
 }
 
 .white-country>input {
@@ -99,12 +93,16 @@ input,
 }
 
 .country-input {
-    height: 30px;
-    margin-bottom: 50px;
+    background-color: #F2F2F2;
+    height: 2.5vh;
 }
 
 .explore-button {
+    height: 3.5vh;
     margin-bottom: .5vh;
+    padding: .2vh;
+    width: 102.5%;
+    background-color: orange;
 }
 
 ul {
@@ -197,7 +195,8 @@ ul {
     float: right;
     margin-left: 7px;
     width: 50px;
-    margin-top: 5px
+    margin-top: 5px;
+    appearance: none;
 }
 
 .day {
