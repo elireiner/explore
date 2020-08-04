@@ -1,13 +1,13 @@
 Explore
 
-[link to live app!](https://elireiner.github.io/explore/)
+[link to live app!](https://explore-three.vercel.app/)
 
+Take a look
+<img src="https://i.ibb.co/SRs17VD/IMG-8177-DB60560-D-1.jpg" width="200"/>                 <img src="https://i.ibb.co/31xgr2D/IMG-918659205482-1.jpg" width="200"/>
 
-Screenshot: coming soon!
+Summary: Are you traveling? Find out more about your destination with this app! Get the news and weather.
 
-Summary: This app allows a user to explore the destination they are traveling to. they can get the weather and the news of their destination.
-
-Technology used: HTML/CSS/JavaScript/jQuery
+Technology used: HTML, CSS, JavaScript, jQuery
 
 
 
