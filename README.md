@@ -9,6 +9,7 @@ Take a look
 Summary: Are you traveling? Find out more about your destination with this app! Get the news and weather.
 
 Technology used: HTML, CSS, JavaScript, jQuery
-
+- Built a front-end weather and news app and connected it to two APIs. 
+- Enabled user input to construct the API request, thereby presenting users with relevant information.
 
 
